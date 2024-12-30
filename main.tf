@@ -52,6 +52,10 @@ resource "azurerm_storage_blob" "react_app_files" {
   source                 = "${path.module}/../build/${each.value}"
 }
 
+output "storage_account_primary_web_endpoint" {
+  value = azurerm_storage_account.react_app_storage.primary_web_endpoint
+}
+
 /*resource "azurerm_cdn_profile" "react_app_cdn_profile" {
   name                = "reactAppCdnProfile"
   location            = azurerm_resource_group.react_app_rg.location
