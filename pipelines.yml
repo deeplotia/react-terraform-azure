@@ -5,7 +5,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  azureServiceConnection: 'svc-con-tst'
+  azureServiceConnection: 'DevOpsTraining'
   azureResourceGroup: 'rg-devopsacademyjan2025-west-europe'
   azureStorageAccount: 'reactappstoragedoacademy'
   buildDir: 'build'
