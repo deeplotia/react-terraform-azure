@@ -67,7 +67,7 @@ stages:
         provider: 'azurerm'
         command: 'plan'
         workingDirectory: '$(System.DefaultWorkingDirectory)'
-        backendServiceArm: '$(azureServiceConnection)'
+        environmentServiceNameAzureRM: '$(azureServiceConnection)'
       displayName: 'Terraform Plan'
 
     - task: TerraformTaskV4@4
@@ -75,7 +75,7 @@ stages:
         provider: 'azurerm'
         command: 'apply'
         workingDirectory: '$(System.DefaultWorkingDirectory)'
-        backendServiceArm: '$(azureServiceConnection)'
+        environmentServiceNameAzureRM: '$(azureServiceConnection)'
         commandOptions: '-auto-approve'
       displayName: 'Terraform Apply'
 
