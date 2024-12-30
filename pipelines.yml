@@ -54,7 +54,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'init'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+        workingDirectory: '$(System.DefaultWorkingDirectory)'
         backendServiceArm: '$(azureServiceConnection)'
         backendAzureRmResourceGroupName: '$(azureResourceGroup)'
         backendAzureRmStorageAccountName: '$(azureStorageAccount)'
@@ -66,7 +66,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'plan'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+        workingDirectory: '$(System.DefaultWorkingDirectory)'
         backendServiceArm: '$(azureServiceConnection)'
       displayName: 'Terraform Plan'
 
@@ -74,7 +74,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'apply'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+        workingDirectory: '$(System.DefaultWorkingDirectory)'
         backendServiceArm: '$(azureServiceConnection)'
         commandOptions: '-auto-approve'
       displayName: 'Terraform Apply'
