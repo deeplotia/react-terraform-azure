@@ -1,0 +1,89 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  azureServiceConnection: 'svc-con-tt'
+  azureResourceGroup: 'rg-devopsacademyjan2025-west-europe'
+  azureStorageAccount: 'reactappstoragedoacademy'
+  buildDir: 'build'
+
+stages:
+- stage: Build
+  jobs:
+  - job: Build
+    steps:
+    - checkout: self
+      displayName: 'Checkout main branch'
+
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '18.x'
+      displayName: 'Install Node.js'
+
+    - script: |
+        npm install
+        npm run build
+      displayName: 'npm install and build'
+
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(Build.SourcesDirectory)/$(buildDir)'
+        Contents: '**'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+      displayName: 'Copy build files to artifact staging directory'
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'react-app-pkg'
+        publishLocation: 'Container'
+      displayName: 'Publish build artifacts'  
+        
+- stage: Deploy
+  jobs:
+  - job: Deploy
+    steps:
+    - download: current
+      artifact: react-app-pkg
+      displayName: 'Download build artifacts'
+
+    - task: TerraformTaskV4@0
+      inputs:
+        provider: 'azurerm'
+        command: 'init'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+        backendServiceArm: '$(azureServiceConnection)'
+        backendAzureRmResourceGroupName: '$(azureResourceGroup)'
+        backendAzureRmStorageAccountName: '$(azureStorageAccount)'
+        backendAzureRmContainerName: 'terraform-state'
+        backendAzureRmKey: 'terraform.tfstate'
+      displayName: 'Terraform Init'
+
+    - task: TerraformTaskV4@0
+      inputs:
+        provider: 'azurerm'
+        command: 'plan'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+        backendServiceArm: '$(azureServiceConnection)'
+      displayName: 'Terraform Plan'
+
+    - task: TerraformTaskV1@0
+      inputs:
+        provider: 'azurerm'
+        command: 'apply'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+        backendServiceArm: '$(azureServiceConnection)'
+        commandOptions: '-auto-approve'
+      displayName: 'Terraform Apply'
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: '$(azureServiceConnection)'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az storage blob upload-batch -d '$web' -s '$(Pipeline.Workspace)/react-app-pkg/$(buildDir)' --account-name $(azureStorageAccount)
+      displayName: 'Upload React app to Azure Storage'
