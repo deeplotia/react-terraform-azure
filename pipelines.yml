@@ -50,7 +50,7 @@ stages:
       artifact: react-app-pkg
       displayName: 'Download build artifacts'
 
-    - task: TerraformTaskV4@0
+    - task: TerraformTaskV4@4
       inputs:
         provider: 'azurerm'
         command: 'init'
@@ -62,7 +62,7 @@ stages:
         backendAzureRmKey: 'terraform.tfstate'
       displayName: 'Terraform Init'
 
-    - task: TerraformTaskV4@0
+    - task: TerraformTaskV4@4
       inputs:
         provider: 'azurerm'
         command: 'plan'
@@ -70,7 +70,7 @@ stages:
         backendServiceArm: '$(azureServiceConnection)'
       displayName: 'Terraform Plan'
 
-    - task: TerraformTaskV4@0
+    - task: TerraformTaskV4@4
       inputs:
         provider: 'azurerm'
         command: 'apply'
