@@ -42,14 +42,30 @@ resource "azurerm_storage_container" "tfstate" {
   container_access_type = "private"
 }
 
+output "root_path" {
+  value = path.root
+}
+
+output "current_working_directory" {
+  value = path.cwd
+}
+
+output "path_module" {
+  value = path.module
+}
+
+output "build_files" {
+  value = fileset("${path.module}/react-app-pkg", "**/*")
+}
+
 resource "azurerm_storage_blob" "react_app_files" {
-  for_each = fileset("${path.module}/build", "")
+  for_each = fileset("${path.cwd}/react-app-pkg", "")
 
   name                   = each.value
   storage_account_name   = azurerm_storage_account.react_app_storage.name
   storage_container_name = "$web"
   type                   = "Block"
-  source                 = "${path.module}/build/${each.value}"
+  source                 = "${path.cwd}/react-app-pkg/${each.value}"
 }
 
 output "storage_account_primary_web_endpoint" {
