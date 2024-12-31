@@ -81,8 +81,17 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
     ##### Option 1
     Create resources manually and then create the terraform remote backend. 
     ##### Option 2
-    Create the resources using terraform apply wihtout specifying backedend configuration and create a storage account container which stores the tfstate and then perform `terraform init -migrate-state`
+    Create the resources using terraform apply wihtout specifying backend configuration and create a storage account container which stores the tfstate and then add the backend configuration in main.tf and perform `terraform init -migrate-state`
 
 - Terraform backend configuration block cannot contain variables. You have to use hardcoded values or use terragrunt it provides a thin wrapper
 
 - In Terraform, the term "workspace" can refer to different contexts, but in this case, it seems to refer to the current working directory where Terraform commands are executed. When you run terraform plan or terraform apply, Terraform operates within the directory where these commands are executed, and it cannot access files outside of this directory using relative paths like work.
+
+#### Terraform Clean
+
+- There is no command like `terraform clean`. Use following commands to achieve the same
+
+    * `rm -f terraform.tfstate terraform.tfstate.backup`
+    * `rm -rf .terraform`
+    * `rm -f plan.out`
+    * Remove Terraform generated configuration files

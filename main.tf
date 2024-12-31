@@ -2,7 +2,7 @@ terraform {
   backend "azurerm" {
     resource_group_name   = "rg-devopsacademyjan2025-west-europe"
     storage_account_name  = "reactappstoragedoacademy"
-    container_name        = "tfstate"
+    container_name        = "react-app-tfstate"
     key                   = "terraform.tfstate"
   }
 }
@@ -36,28 +36,6 @@ resource "azurerm_storage_account_static_website" "react_app_storage_st_webapp" 
   error_404_document = "404.html"
 }
 
-resource "azurerm_storage_container" "tfstate" {
-  name                  = "tfstate"
-  storage_account_id  = azurerm_storage_account.react_app_storage.id
-  container_access_type = "private"
-}
-
-output "root_path" {
-  value = path.root
-}
-
-output "current_working_directory" {
-  value = path.cwd
-}
-
-output "path_module" {
-  value = path.module
-}
-
-output "build_files" {
-  value = fileset("${path.cwd}/react-app-pkg", "**/*")
-}
-
 resource "azurerm_storage_blob" "react_app_files" {
   for_each = fileset("${path.cwd}/react-app-pkg", "")
 
@@ -66,6 +44,13 @@ resource "azurerm_storage_blob" "react_app_files" {
   storage_container_name = "$web"
   type                   = "Block"
   source                 = "${path.cwd}/react-app-pkg/${each.value}"
+  content_md5            = filemd5(each.key)
+}
+
+resource "azurerm_storage_container" "react-app-tfstate" {
+  name                  = "react-app-tfstate"
+  storage_account_id  = azurerm_storage_account.react_app_storage.id
+  container_access_type = "private"
 }
 
 output "storage_account_primary_web_endpoint" {
