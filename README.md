@@ -84,3 +84,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
     Create the resources using terraform apply wihtout specifying backedend configuration and create a storage account container which stores the tfstate and then perform `terraform init -migrate-state`
 
 - Terraform backend configuration block cannot contain variables. You have to use hardcoded values or use terragrunt it provides a thin wrapper
+
+- In Terraform, the term "workspace" can refer to different contexts, but in this case, it seems to refer to the current working directory where Terraform commands are executed. When you run terraform plan or terraform apply, Terraform operates within the directory where these commands are executed, and it cannot access files outside of this directory using relative paths like work.

@@ -50,6 +50,13 @@ stages:
       artifact: react-app-pkg
       displayName: 'Download build artifacts'
 
+    - script: |
+        echo $(System.DefaultWorkingDirectory)
+        mkdir -p $(System.DefaultWorkingDirectory)/react-app-pkg
+        echo $(Pipeline.Workspace)
+        cp -r $(Pipeline.Workspace)/react-app-pkg/* $(System.DefaultWorkingDirectory)/react-app-pkg/
+      displayName: 'Copy build artifacts to working directory'  
+
     - task: TerraformTaskV4@4
       inputs:
         provider: 'azurerm'
