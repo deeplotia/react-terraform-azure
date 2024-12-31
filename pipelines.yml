@@ -93,5 +93,5 @@ stages:
         inlineScript: |
           pwd
           ls -ltr
-          az storage blob upload-batch -d '$web' -s '$(Pipeline.Workspace)/react-app-pkg/$(buildDir)' --account-name $(azureStorageAccount)
+          az storage blob upload-batch -d '$web' -s '$(Pipeline.Workspace)/react-app-pkg/' --account-name $(azureStorageAccount)
       displayName: 'Upload React app to Azure Storage'
