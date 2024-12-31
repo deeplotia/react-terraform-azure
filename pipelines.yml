@@ -64,7 +64,7 @@ stages:
         backendServiceArm: '$(azureServiceConnection)'
         backendAzureRmResourceGroupName: '$(azureResourceGroup)'
         backendAzureRmStorageAccountName: '$(azureStorageAccount)'
-        backendAzureRmContainerName: 'tfstate'
+        backendAzureRmContainerName: 'react-app-tfstate'
         backendAzureRmKey: 'terraform.tfstate'
       displayName: 'Terraform Init'
 
