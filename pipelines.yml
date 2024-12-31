@@ -79,13 +79,13 @@ stages:
         commandOptions: '-auto-approve'
       displayName: 'Terraform Apply'
 
-    - task: AzureCLI@2
-      inputs:
-        azureSubscription: '$(azureServiceConnection)'
-        scriptType: 'bash'
-        scriptLocation: 'inlineScript'
-        inlineScript: |
-          pwd
-          ls -ltr
-          az storage blob upload-batch -d '$web' -s '$(Pipeline.Workspace)/react-app-pkg/$(buildDir)' --account-name $(azureStorageAccount)
-      displayName: 'Upload React app to Azure Storage'
+    # - task: AzureCLI@2
+    #   inputs:
+    #     azureSubscription: '$(azureServiceConnection)'
+    #     scriptType: 'bash'
+    #     scriptLocation: 'inlineScript'
+    #     inlineScript: |
+    #       pwd
+    #       ls -ltr
+    #       az storage blob upload-batch -d '$web' -s '$(Pipeline.Workspace)/react-app-pkg/$(buildDir)' --account-name $(azureStorageAccount)
+    #   displayName: 'Upload React app to Azure Storage'

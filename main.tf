@@ -43,7 +43,7 @@ resource "azurerm_storage_container" "tfstate" {
 }
 
 resource "azurerm_storage_blob" "react_app_files" {
-  for_each = fileset("${path.module}/../build", "")
+  for_each = fileset("${path.module}/build", "")
 
   name                   = each.value
   storage_account_name   = azurerm_storage_account.react_app_storage.name
