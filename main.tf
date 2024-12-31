@@ -55,17 +55,17 @@ output "path_module" {
 }
 
 output "build_files" {
-  value = fileset("${path.module}/react-app-pkg", "**/*")
+  value = fileset("${path.cwd}/../react-app-pkg", "**/*")
 }
 
 resource "azurerm_storage_blob" "react_app_files" {
-  for_each = fileset("${path.cwd}/react-app-pkg", "")
+  for_each = fileset("${path.cwd}/../react-app-pkg", "")
 
   name                   = each.value
   storage_account_name   = azurerm_storage_account.react_app_storage.name
   storage_container_name = "$web"
   type                   = "Block"
-  source                 = "${path.cwd}/react-app-pkg/${each.value}"
+  source                 = "${path.cwd}/../react-app-pkg/${each.value}"
 }
 
 output "storage_account_primary_web_endpoint" {
