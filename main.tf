@@ -49,7 +49,7 @@ resource "azurerm_storage_blob" "react_app_files" {
   storage_account_name   = azurerm_storage_account.react_app_storage.name
   storage_container_name = "$web"
   type                   = "Block"
-  source                 = "${path.module}/../build/${each.value}"
+  source                 = "${path.module}/build/${each.value}"
 }
 
 output "storage_account_primary_web_endpoint" {
