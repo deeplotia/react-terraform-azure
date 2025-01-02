@@ -22,7 +22,7 @@ const questions = [
   {
     question: "What is the purpose of Continuous Delivery (CD) in DevOps?​​",
     options: ["To merge code changes quickly​", "To automate the testing of code​​", "To automatically deploy code to production after testing​", "To make code available to deploy at any time​​"],
-    answer: "To automatically deploy code to production after testing​"
+    answer: "To make code available to deploy at any time​​"
   },
   {
     question: "In DevOps, what does \"Infrastructure as Code\" (IaC) mean??​",
