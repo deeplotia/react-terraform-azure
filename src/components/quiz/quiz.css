@@ -32,6 +32,58 @@
     background-color: #807d7d;
   }
   
-  .score-section {
-    font-size: 24px;
+.score-section {
+  position: relative;
+  text-align: center;
+  animation: glow 1s infinite alternate;
+  font-size: 24px;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #59e652, 0 0 30px #59e652, 0 0 40px #59e652, 0 0 50px #59e652, 0 0 60px #59e652, 0 0 70px #59e652;
   }
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #59e652, 0 0 40px #59e652, 0 0 50px #59e652, 0 0 60px #59e652, 0 0 70px #59e652, 0 0 80px #59e652;
+  }
+}
+
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #ff00ff;
+  animation: confetti-fall 5s infinite;
+}
+
+@keyframes confetti-fall {
+  0% {
+    top: -10px;
+    left: 50%;
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    left: 50%;
+    opacity: 0;
+  }
+}
+  
+
+
+.score-container button {
+  margin: 50px;
+  padding: 10px 20px;
+  font-size: 24px;
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.score-section button:hover {
+background-color: #828186;
+color: white;
+transition: background-color 1s ease, color 0.5s ease;
+}

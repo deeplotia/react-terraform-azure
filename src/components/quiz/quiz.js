@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './quiz.css';
-import questions from './questions';
+import questions from './questions/questions';
 import useCustomNavigate from '../../custom-hooks/navigate';
 
 const Quiz = () => {
@@ -29,11 +29,12 @@ const Quiz = () => {
   return (
     <div className="quiz-container">
       {showScore ? (
-        <div>
+        <div className="score-container">
           <div className="score-section">
             You scored {score} out of {questions.length}
           </div>
           <button onClick={() => navigateTo('/')}>Home</button>
+          <button onClick={() => navigateTo('/answers')}>Answers</button>
         </div>
       ) : (
         <>

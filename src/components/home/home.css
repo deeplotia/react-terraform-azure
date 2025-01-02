@@ -2,12 +2,26 @@
     text-align: center;
   }
   
-  .App-logo {
+.App-logo {
     height: 40vmin;
     pointer-events: none;
-  }
+}
+
+.App button {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.App button:hover {
+background-color: #828186;
+color: white;
+transition: background-color 1s ease, color 0.5s ease;
+}
   
-  .App-header {
+.App-header {
     background-color: #282c34;
     min-height: 100vh;
     display: flex;
