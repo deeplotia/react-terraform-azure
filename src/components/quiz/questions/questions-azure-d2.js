@@ -21,8 +21,8 @@ const questions = [
   },
   {
     question: "Which two types of pipelines are available in Azure Pipelines?",
-    options: ["Build and Deploy​​", "Test and Monitor​", "Build and Release​", "Deploy and Monitor​"],
-    answer: "Build and Release"
+    options: ["Build and Deploy​​", "Test and Monitor​", "Yaml and Release​", "Deploy and Monitor​"],
+    answer: "Yaml and Release"
   },
   {
     question: "What is a benefit of using Azure Pipelines?​",
