@@ -27,7 +27,7 @@ const questions = [
   {
     question: "What is a benefit of using Azure Pipelines?​",
     options: ["It requires no configuration and automates deployments without any setup.​​", "It supports continuous integration and continuous delivery (CI/CD).​​", "It only supports manual deployments.​", "It only works with Windows applications.​"],
-    answer: "It requires no configuration and automates deployments without any setup.​"
+    answer: "It supports continuous integration and continuous delivery (CI/CD).​"
   }
 ];
 
