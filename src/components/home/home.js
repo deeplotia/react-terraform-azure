@@ -17,7 +17,7 @@ const Home = () => {
         <header className="App-header">
         <h1>Welcome to the Quiz</h1>
         <button onClick={() => handleQuizSelection('quiz-devops-d1')}>Day 1 - DevOps</button>
-        {/* <button onClick={() => handleQuizSelection('quiz-azure-d2')}>Day 2 - Azure</button> */}
+        <button onClick={() => handleQuizSelection('quiz-azure-d2')}>Day 2 - Azure</button>
         </header>
     </div>
   );
