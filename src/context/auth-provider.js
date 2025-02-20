@@ -26,9 +26,9 @@ export const AuthProvider = ({ children }) => {
     initializeMsal();
   }, []);
 
-  if (!isInitialized) {
-    return <div>Loading...</div>;
-  }
+  //if (!isInitialized) {
+  //  return <div>Loading...</div>;
+  //}
 
   return (
     <MsalProvider instance={msalInstance}>

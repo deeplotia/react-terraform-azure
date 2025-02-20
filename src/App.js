@@ -18,9 +18,9 @@ function App() {
     }
   }, [accounts, instance]);
 
-  if (accounts.length === 0) {
-    return <div>Loading...</div>;
-  }
+  //if (accounts.length === 0) {
+  //  return <div>Loading...</div>;
+  //  }
 
   return (
     <QuizProvider>

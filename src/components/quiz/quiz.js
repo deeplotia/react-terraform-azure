@@ -43,7 +43,7 @@ const Quiz = () => {
             You scored {score} out of {questions.length}
           </div>
           <button onClick={() => navigateTo('/')}>Home</button>
-          <button onClick={() => navigateTo('/answers')}>Answers</button>
+          {/* <button onClick={() => navigateTo('/answers')}>Answers</button> */}
         </div>
       ) : (
         questions.length > 0 && (
